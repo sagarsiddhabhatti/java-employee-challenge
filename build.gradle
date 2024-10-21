@@ -13,9 +13,26 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-web' // For traditional MVC
+    implementation 'org.springframework.boot:spring-boot-starter-webflux' // For reactive WebClient
     implementation 'javax.inject:javax.inject:1'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.projectlombok:lombok:1.18.20'// Dependency Injection
+
+    // Lombok for boilerplate code reduction
+    compileOnly 'org.projectlombok:lombok' // Updated to latest version
+    annotationProcessor 'org.projectlombok:lombok' // Updated to latest version
+
+    // Testing dependencies
+    testImplementation 'org.springframework.boot:spring-boot-starter-test' // For Spring testing support
+    testImplementation 'org.mockito:mockito-core' // Mockito for mocking
+    testImplementation 'org.junit.jupiter:junit-jupiter' // JUnit 5 for testing
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.10.0' // or the latest version
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+
+    implementation 'javax.validation:validation-api:2.0.1.Final'
+    implementation 'org.hibernate.validator:hibernate-validator:6.1.5.Final'
+    implementation 'org.glassfish:javax.el:3.0.0'
+
 }
 
 test {
