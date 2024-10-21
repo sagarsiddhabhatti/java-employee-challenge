@@ -1,5 +1,6 @@
 package com.example.rqchallenge.controller;
 
+import com.example.rqchallenge.constants.AppConstants;
 import com.example.rqchallenge.model.Employee;
 import com.example.rqchallenge.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
@@ -55,7 +56,7 @@ public class EmployeeController implements IEmployeeController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<Employee> getEmployeeById(
-            @PathVariable @Pattern(regexp = "\\d+", message = "Invalid employee ID format") String id) {
+            @PathVariable @Pattern(regexp = AppConstants.ID_REGEX, message = AppConstants.INVALID_EMPLOYEE_ID_FORMAT) String id) {
         log.debug("Request to fetch employee with ID: {}", id);
         Employee employee = employeeService.getEmployeeById(id);
         log.info("Successfully retrieved employee: {}", employee);
