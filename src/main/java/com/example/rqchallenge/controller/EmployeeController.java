@@ -21,6 +21,10 @@ public class EmployeeController implements IEmployeeController {
     @Autowired
     private final EmployeeService employeeService;
 
+    /**
+     *  all employees whose name contains or matches the string input provided
+     * @return list of employees
+     */
     @GetMapping
     public ResponseEntity<List<Employee>> getAllEmployees() {
         log.debug("Request to fetch all employees received");
@@ -29,6 +33,11 @@ public class EmployeeController implements IEmployeeController {
         return ResponseEntity.ok(employees);
     }
 
+    /**
+     * all employees whose name contains or matches the string input provided
+     * @param searchString
+     * @return list of employees
+     */
     @GetMapping("/search/{searchString}")
     public ResponseEntity<List<Employee>> getEmployeesByNameSearch(@PathVariable String searchString) {
         log.debug("Search request for employees with name containing: {}", searchString);
@@ -37,6 +46,11 @@ public class EmployeeController implements IEmployeeController {
         return ResponseEntity.ok(employees);
     }
 
+    /**
+     * return a single employee
+     * @param id
+     * @return employee
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Employee> getEmployeeById(
             @PathVariable @Pattern(regexp = "\\d+", message = "Invalid employee ID format") String id) {
@@ -46,6 +60,10 @@ public class EmployeeController implements IEmployeeController {
         return ResponseEntity.ok(employee);
     }
 
+    /**
+     * a single integer indicating the highest salary of all employees
+     * @return  integer of the highest salary
+     */
     @GetMapping("/highestSalary")
     public ResponseEntity<Integer> getHighestSalaryOfEmployees() {
         log.debug("Request to fetch highest salary among employees");
@@ -54,6 +72,10 @@ public class EmployeeController implements IEmployeeController {
         return ResponseEntity.ok(highestSalary);
     }
 
+    /**
+     *  a list of the top 10 employees based off of their salaries
+     * @return  list of employees
+     */
     @GetMapping("/topTenHighestEarningEmployeeNames")
     public ResponseEntity<List<String>> getTopTenHighestEarningEmployeeNames() {
         log.debug("Request to fetch top ten highest earning employee names");
@@ -62,6 +84,11 @@ public class EmployeeController implements IEmployeeController {
         return ResponseEntity.ok(topEmployees);
     }
 
+    /**
+     * a status of success or failed based on if an employee was created
+     * @param employeeInput
+     * @return  string of the status (i.e. success)
+     */
     @PostMapping
     public ResponseEntity<String> createEmployee(@RequestBody Map<String, Object> employeeInput) {
         log.debug("Request to create new employee with data: {}", employeeInput);
@@ -75,11 +102,16 @@ public class EmployeeController implements IEmployeeController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * deletes the employee with specified id given
+     * @param id
+     * @return the name of the employee that was deleted
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteEmployeeById(@PathVariable String id) {
         log.debug("Request to delete employee with ID: {}", id);
         String employeeName = employeeService.deleteEmployeeById(id);
         log.info("Successfully deleted employee: {}", employeeName);
-        return ResponseEntity.ok("Deleted employee: " + employeeName);
+        return ResponseEntity.ok(employeeName);
     }
 }

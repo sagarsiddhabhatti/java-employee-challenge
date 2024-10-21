@@ -161,7 +161,7 @@ public class EmployeeControllerTest {
 
         // Assert
         assertEquals(200, response.getStatusCodeValue());
-        assertEquals("Deleted employee: " + employeeName, response.getBody());
+        assertEquals( employeeName, response.getBody());
         verify(employeeService, times(1)).deleteEmployeeById(id);
     }
 
