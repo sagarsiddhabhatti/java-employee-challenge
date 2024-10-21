@@ -3,7 +3,6 @@ package com.example.rqchallenge.service;
 import com.example.rqchallenge.constants.TestConstants;
 import com.example.rqchallenge.model.Employee;
 import com.example.rqchallenge.service.Impl.EmployeeServiceImpl;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -13,7 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -31,7 +29,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @TestPropertySource(properties = {
         "api.base-url=https://dummy.test.restapiexample.com"
 })
-
 class EmployeeServiceImplTest {
 
     private EmployeeServiceImpl employeeService;
@@ -55,7 +52,7 @@ class EmployeeServiceImplTest {
 
     @Test
     void testGetAllEmployees() throws Exception {
-           String jsonResponse = getMockResonceData("employee_list.json");
+        String jsonResponse = getMockResonceData("employee_list.json");
 
         // Enqueue the mock response
         mockWebServer.enqueue(new MockResponse()
@@ -128,7 +125,7 @@ class EmployeeServiceImplTest {
         String id = "1";
         String deleteResponse = getMockResonceData("delete_response.json");
 //"{\"status\":\"success\",\"message\":\"successfully! deleted Record\"}";
-        String getEmployeeDataResponce = getMockResonceData("employee_data_by_id_response.json");;
+        String getEmployeeDataResponce = getMockResonceData("employee_data_by_id_response.json");
         mockWebServer.enqueue(new MockResponse()
                 .setResponseCode(200)
                 .setHeader(TestConstants.CONTENT_TYPE, TestConstants.APPLICATION_JSON)
@@ -148,7 +145,7 @@ class EmployeeServiceImplTest {
 
     @NotNull
     private String getMockResonceData(String resourceLocation) throws IOException {
-        return new String(Files.readAllBytes(Paths.get(ResourceUtils.getFile("classpath:"+resourceLocation).toURI())));
+        return new String(Files.readAllBytes(Paths.get(ResourceUtils.getFile("classpath:" + resourceLocation).toURI())));
     }
 
     // Add more test cases for other methods...

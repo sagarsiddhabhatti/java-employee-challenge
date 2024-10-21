@@ -8,7 +8,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 import utils.MockEmployeeDataGenerator;
 
@@ -65,7 +64,7 @@ public class EmployeeControllerTest {
     @Test
     public void testSearchEmployees_Success() {
         // Arrange
-        List<Employee> employees = Arrays.asList(new Employee("1", "John Doe", "50000", "30",""));
+        List<Employee> employees = Arrays.asList(new Employee("1", "John Doe", "50000", "30", ""));
         String searchString = "John";
 
         when(employeeService.getEmployeesByNameSearch(searchString)).thenReturn(employees);
@@ -83,7 +82,7 @@ public class EmployeeControllerTest {
     @Test
     public void testGetEmployeeById_Success() {
         // Arrange
-        Employee employee = new Employee("1", "John Doe", "50000", "30","");
+        Employee employee = new Employee("1", "John Doe", "50000", "30", "");
         String id = "1";
 
         when(employeeService.getEmployeeById(id)).thenReturn(employee);
@@ -161,7 +160,7 @@ public class EmployeeControllerTest {
 
         // Assert
         assertEquals(200, response.getStatusCodeValue());
-        assertEquals( employeeName, response.getBody());
+        assertEquals(employeeName, response.getBody());
         verify(employeeService, times(1)).deleteEmployeeById(id);
     }
 

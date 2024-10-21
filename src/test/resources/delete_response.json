@@ -1,1 +1,4 @@
-{"status":"success","message":"successfully! deleted Record"}
+{
+  "status": "success",
+  "message": "successfully! deleted Record"
+}

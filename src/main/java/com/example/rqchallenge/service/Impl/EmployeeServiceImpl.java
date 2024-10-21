@@ -77,6 +77,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         return response.getData();
     }
+
     @Override
     public Employee getEmployeeById(String id) {
         log.debug("Fetching employee with ID: {}", id);
@@ -137,7 +138,8 @@ public class EmployeeServiceImpl implements EmployeeService {
                     .uri(AppConstants.CREATE_EMPLOYEE)
                     .bodyValue(employeeInput)
                     .retrieve()
-                    .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {})  // Specify the correct Map type
+                    .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {
+                    })  // Specify the correct Map type
                     .block();
 
             // Extract the "status" from the response map
@@ -165,6 +167,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred", e);
         }
     }
+
     @Override
     public String deleteEmployeeById(String id) {
         log.debug("Deleting employee with ID: {}", id);

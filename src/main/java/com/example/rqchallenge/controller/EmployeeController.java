@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +21,8 @@ public class EmployeeController implements IEmployeeController {
     private final EmployeeService employeeService;
 
     /**
-     *  all employees whose name contains or matches the string input provided
+     * all employees whose name contains or matches the string input provided
+     *
      * @return list of employees
      */
     @GetMapping
@@ -35,6 +35,7 @@ public class EmployeeController implements IEmployeeController {
 
     /**
      * all employees whose name contains or matches the string input provided
+     *
      * @param searchString
      * @return list of employees
      */
@@ -48,6 +49,7 @@ public class EmployeeController implements IEmployeeController {
 
     /**
      * return a single employee
+     *
      * @param id
      * @return employee
      */
@@ -62,7 +64,8 @@ public class EmployeeController implements IEmployeeController {
 
     /**
      * a single integer indicating the highest salary of all employees
-     * @return  integer of the highest salary
+     *
+     * @return integer of the highest salary
      */
     @GetMapping("/highestSalary")
     public ResponseEntity<Integer> getHighestSalaryOfEmployees() {
@@ -73,8 +76,9 @@ public class EmployeeController implements IEmployeeController {
     }
 
     /**
-     *  a list of the top 10 employees based off of their salaries
-     * @return  list of employees
+     * a list of the top 10 employees based off of their salaries
+     *
+     * @return list of employees
      */
     @GetMapping("/topTenHighestEarningEmployeeNames")
     public ResponseEntity<List<String>> getTopTenHighestEarningEmployeeNames() {
@@ -86,8 +90,9 @@ public class EmployeeController implements IEmployeeController {
 
     /**
      * a status of success or failed based on if an employee was created
+     *
      * @param employeeInput
-     * @return  string of the status (i.e. success)
+     * @return string of the status (i.e. success)
      */
     @PostMapping
     public ResponseEntity<String> createEmployee(@RequestBody Map<String, Object> employeeInput) {
@@ -104,6 +109,7 @@ public class EmployeeController implements IEmployeeController {
 
     /**
      * deletes the employee with specified id given
+     *
      * @param id
      * @return the name of the employee that was deleted
      */
